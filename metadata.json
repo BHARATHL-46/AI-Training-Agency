@@ -1,0 +1,5 @@
+{
+  "name": "AI Training Agency Platform",
+  "description": "A production-ready AI-powered learning management system with structured content generation, quizzes, and real-time analytics.",
+  "requestFramePermissions": ["microphone"]
+}

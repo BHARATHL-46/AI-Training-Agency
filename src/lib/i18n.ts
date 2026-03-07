@@ -1,0 +1,115 @@
+import i18n from 'i18next';
+import { initReactI18next } from 'react-i18next';
+import LanguageDetector from 'i18next-browser-languagedetector';
+
+const resources = {
+  en: {
+    translation: {
+      dashboard: 'Dashboard',
+      modules: 'Modules',
+      leaderboard: 'Leaderboard',
+      analytics: 'Analytics',
+      profile: 'Profile',
+      logout: 'Logout',
+      create_module: 'Create Module',
+      quiz_history: 'Quiz History',
+      ready_for_quiz: 'Ready for Quiz',
+      play_audio: 'Play Audio',
+      passing_score: 'Passing Score',
+      objectives: 'Learning Objectives',
+      summary: 'Summary',
+      notes: 'My Notes',
+      time: 'mins',
+      xp_reward: 'XP',
+      example: 'Example',
+      help_title: 'Need help?',
+      help_desc: "Ask our AI assistant about this module's content.",
+      open_chat: 'Open AI Chat',
+    },
+  },
+  hi: {
+    translation: {
+      dashboard: 'डैशबोर्ड',
+      modules: 'मॉड्यूल',
+      leaderboard: 'लीडरबोर्ड',
+      analytics: 'एनालिटिक्स',
+      profile: 'प्रोफ़ाइल',
+      logout: 'लॉग आउट',
+      create_module: 'मॉड्यूल बनाएं',
+      quiz_history: 'प्रश्नोत्तरी इतिहास',
+      ready_for_quiz: 'प्रश्नोत्तरी के लिए तैयार',
+      play_audio: 'ऑडियो चलाएं',
+      passing_score: 'उत्तीर्ण स्कोर',
+      objectives: 'सीखने के उद्देश्य',
+      summary: 'सारांश',
+      notes: 'मेरे नोट्स',
+      time: 'मिनट',
+      xp_reward: 'एक्सपी',
+      example: 'उदाहरण',
+      help_title: 'क्या आपको मदद चाहिए?',
+      help_desc: 'इस मॉड्यूल की सामग्री के बारे में हमारे एआई सहायक से पूछें।',
+      open_chat: 'एआई चैट खोलें',
+    },
+  },
+  es: {
+    translation: {
+      dashboard: 'Tablero',
+      modules: 'Módulos',
+      leaderboard: 'Clasificación',
+      analytics: 'Analítica',
+      profile: 'Perfil',
+      logout: 'Cerrar sesión',
+      create_module: 'Crear módulo',
+      quiz_history: 'Historial de cuestionarios',
+      ready_for_quiz: 'Listo para el cuestionario',
+      play_audio: 'Reproducir audio',
+      passing_score: 'Puntuación de aprobación',
+      objectives: 'Objetivos de aprendizaje',
+      summary: 'Resumen',
+      notes: 'Mis notas',
+      time: 'min',
+      xp_reward: 'XP',
+      example: 'Ejemplo',
+      help_title: '¿Necesitas ayuda?',
+      help_desc: 'Pregunta a nuestro asistente de IA sobre el contenido de este módulo.',
+      open_chat: 'Abrir chat de IA',
+    },
+  },
+  ta: {
+    translation: {
+      dashboard: 'டாஷ்போர்டு',
+      modules: 'தொகுதிகள்',
+      leaderboard: 'முன்னணிப் பட்டியல்',
+      analytics: 'பகுப்பாய்வு',
+      profile: 'சுயவிவரம்',
+      logout: 'வெளியேறு',
+      create_module: 'தொகுதியை உருவாக்கு',
+      quiz_history: 'வினாடி வினா வரலாறு',
+      ready_for_quiz: 'வினாடி வினாவிற்கு தயார்',
+      play_audio: 'ஆடியோவை இயக்கு',
+      passing_score: 'தேர்ச்சி மதிப்பெண்',
+      objectives: 'கற்றல் நோக்கங்கள்',
+      summary: 'சுருக்கம்',
+      notes: 'எனது குறிப்புகள்',
+      time: 'நிமிடங்கள்',
+      xp_reward: 'XP',
+      example: 'உதாரணம்',
+      help_title: 'உதவி தேவையா?',
+      help_desc: 'இந்தத் தொகுதியின் உள்ளடக்கத்தைப் பற்றி எமது AI உதவியாளரிடம் கேளுங்கள்.',
+      open_chat: 'AI அரட்டையைத் திற',
+    },
+  },
+};
+
+i18n
+  .use(initReactI18next)
+  .init({
+    resources,
+    lng: 'en',
+    fallbackLng: 'en',
+    interpolation: {
+      escapeValue: false,
+    },
+  });
+
+export default i18n;

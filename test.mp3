@@ -1,0 +1,16 @@
+HTTP/1.1 400 Bad Request
+Date: Fri, 06 Mar 2026 16:26:06 GMT
+Content-Type: application/json
+Content-Length: 159
+Connection: keep-alive
+Server: cloudflare
+Nel: {"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}
+X-Frame-Options: DENY
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 1; mode=block
+cf-cache-status: DYNAMIC
+Report-To: {"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=VmdzIdqrg5GFqYXoDZNw5rKDreihrrE6SZWKT1bPb4gR61fIiG4%2BIK%2FIxWywU%2BLHkuRWKzWjBRziqEQSg%2BXh%2FGip9dH3AIdODZkEJm6Ly%2F%2BhPY03cEsmmjE%3D"}]}
+CF-RAY: 9d82b85e2f556198-SIN
+alt-svc: h3=":443"; ma=86400
+
+{"error":{"message":"Invalid JSON payload: unexpected character: line 1 column 2 (char 1)","type":"invalid_request_error","param":"request_body","code":"400"}}
