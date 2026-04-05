@@ -28,6 +28,7 @@ export const AdminModuleEditor = () => {
   // AI Heading Suggestions State
   const [suggestions, setSuggestions] = useState<string[]>([]);
   const [isSuggesting, setIsSuggesting] = useState(false);
+  const [aiError, setAiError] = useState<string | null>(null);
   const debounceTimer = useRef<NodeJS.Timeout | null>(null);
 
   // RAG State
@@ -112,6 +113,7 @@ export const AdminModuleEditor = () => {
   const fetchSuggestions = async () => {
     if (!title.trim()) return;
     setIsSuggesting(true);
+    setAiError(null);
     try {
       const results = await generateHeadingSuggestions(title, headings);
       // Filter out any that are already in headings
@@ -119,6 +121,13 @@ export const AdminModuleEditor = () => {
       setSuggestions(filtered);
     } catch (error) {
       console.error('Failed to fetch suggestions:', error);
+      try {
+        const msg = (error as any)?.message || JSON.stringify(error);
+        setAiError(msg);
+        alert('Failed to fetch AI suggestions: ' + msg);
+      } catch (e) {
+        setAiError('Failed to fetch AI suggestions');
+      }
     } finally {
       setIsSuggesting(false);
     }
@@ -324,6 +333,15 @@ export const AdminModuleEditor = () => {
                     <RefreshCw size={14} className={isSuggesting ? 'animate-spin' : ''} />
                   </button>
                 </div>
+
+                {aiError && (
+                  <div className="mt-2 p-3 bg-red-600/10 border border-red-600/20 rounded-lg text-sm text-red-300">
+                    <div className="flex items-center justify-between">
+                      <span>AI service error: {aiError}</span>
+                      <button onClick={() => setAiError(null)} className="text-xs underline">Dismiss</button>
+                    </div>
+                  </div>
+                )}
 
                 <div className="flex flex-wrap gap-2">
                   <AnimatePresence mode="popLayout">

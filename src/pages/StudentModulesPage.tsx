@@ -16,6 +16,12 @@ export const StudentModulesPage = () => {
   const [activeFilter, setActiveFilter] = useState<'All' | 'In Progress' | 'Completed' | 'Locked'>('All');
   const [sortBy, setSortBy] = useState<'Newest' | 'Difficulty' | 'Progress'>('Newest');
   const [selectedModule, setSelectedModule] = useState<any | null>(null);
+  const [toastMessage, setToastMessage] = useState<string | null>(null);
+
+  const showToast = (message: string) => {
+    setToastMessage(message);
+    setTimeout(() => setToastMessage(null), 3000);
+  };
 
   const filteredModules = modules.filter(m => {
     const isUnlocked = isModuleUnlocked(m.id);
@@ -273,10 +279,16 @@ export const StudentModulesPage = () => {
                     <X size={24} />
                   </button>
                   <div className="flex gap-3">
-                    <button className="p-3 bg-white/5 border border-white/10 rounded-2xl text-white/40 hover:text-white transition-all">
+                    <button 
+                      onClick={() => showToast('Download feature coming soon!')}
+                      className="p-3 bg-white/5 border border-white/10 rounded-2xl text-white/40 hover:text-white transition-all"
+                    >
                       <Download size={20} />
                     </button>
-                    <button className="p-3 bg-white/5 border border-white/10 rounded-2xl text-white/40 hover:text-white transition-all">
+                    <button 
+                      onClick={() => showToast('Share feature coming soon!')}
+                      className="p-3 bg-white/5 border border-white/10 rounded-2xl text-white/40 hover:text-white transition-all"
+                    >
                       <ExternalLink size={20} />
                     </button>
                   </div>
@@ -362,6 +374,23 @@ export const StudentModulesPage = () => {
               </div>
             </motion.div>
           </>
+        )}
+      </AnimatePresence>
+
+      {/* Toast Notification */}
+      <AnimatePresence>
+        {toastMessage && (
+          <motion.div
+            initial={{ opacity: 0, y: 50, scale: 0.9 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.9, y: 20 }}
+            className="fixed bottom-10 left-1/2 -translate-x-1/2 z-[200] bg-white/10 backdrop-blur-2xl border border-white/20 px-6 py-4 rounded-2xl shadow-2xl flex items-center gap-3 text-white"
+          >
+            <div className="w-8 h-8 rounded-full bg-indigo-500/20 flex items-center justify-center text-indigo-400">
+              <CheckCircle2 size={16} />
+            </div>
+            <p className="text-sm font-bold">{toastMessage}</p>
+          </motion.div>
         )}
       </AnimatePresence>
     </div>

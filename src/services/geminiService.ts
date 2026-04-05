@@ -1,7 +1,19 @@
 import { GoogleGenAI } from "@google/genai";
 
 const apiKey = process.env.GEMINI_API_KEY;
+if (!apiKey) {
+  console.warn('[geminiService] GEMINI_API_KEY is not set. Gemini requests will fail.');
+}
 const ai = new GoogleGenAI({ apiKey, apiVersion: "v1beta" });
+
+const handleApiError = (e: any) => {
+  const msg = e?.message || e?.toString?.() || '';
+  const status = e?.status || e?.response?.status || (e?.error && e.error.code);
+  if (status === 403 || /reported as leaked/i.test(msg) || /permission_denied/i.test(msg)) {
+    throw new Error('API key permission denied: your API key may have been leaked or revoked. Rotate the key and update GEMINI_API_KEY.');
+  }
+  throw e;
+};
 
 const stripMarkdown = (text: string) => {
   if (!text) return "";
@@ -45,11 +57,16 @@ FORMAT:
 
   const prompt = `Topic: ${topic}. Headings: ${headings?.join(', ')}. Language: ${language}.`;
 
-  const response = await ai.models.generateContentStream({
-    model,
-    contents: prompt,
-    config: { systemInstruction: systemInstruction, responseMimeType: "application/json" },
-  });
+  let response: any;
+  try {
+    response = await ai.models.generateContentStream({
+      model,
+      contents: prompt,
+      config: { systemInstruction: systemInstruction, responseMimeType: "application/json" },
+    });
+  } catch (e) {
+    handleApiError(e);
+  }
 
   let fullText = "";
   for await (const chunk of response) {
@@ -89,11 +106,16 @@ CRITICAL:
 
   const prompt = `Translate this JSON to ${targetLanguage}:\n${JSON.stringify(content)}`;
 
-  const response = await ai.models.generateContent({
-    model,
-    contents: prompt,
-    config: { systemInstruction: systemInstruction, responseMimeType: "application/json" },
-  });
+  let response: any;
+  try {
+    response = await ai.models.generateContent({
+      model,
+      contents: prompt,
+      config: { systemInstruction: systemInstruction, responseMimeType: "application/json" },
+    });
+  } catch (e) {
+    handleApiError(e);
+  }
 
   console.log(`[geminiService] Translation response received. Length: ${response.text?.length || 0}`);
 
@@ -114,14 +136,19 @@ export const generateQuiz = async (topic: string, language: string, headings?: s
   Each question should have 4 options and one correct answer.
   Return as a JSON array of objects with fields: question, options (array), correctAnswer (index).`;
 
-  const response = await ai.models.generateContent({
-    model,
-    contents: prompt,
-    config: {
-      systemInstruction,
-      responseMimeType: "application/json",
-    },
-  });
+  let response: any;
+  try {
+    response = await ai.models.generateContent({
+      model,
+      contents: prompt,
+      config: {
+        systemInstruction,
+        responseMimeType: "application/json",
+      },
+    });
+  } catch (e) {
+    handleApiError(e);
+  }
 
   return JSON.parse(response.text || "[]");
 };
@@ -143,11 +170,16 @@ Rules:
   const prompt = `Module Title: ${moduleTitle}
 Existing Headings: ${existingHeadings.join(', ')}`;
 
-  const response = await ai.models.generateContent({
-    model,
-    contents: prompt,
-    config: { systemInstruction: systemInstruction, responseMimeType: "application/json" },
-  });
+  let response: any;
+  try {
+    response = await ai.models.generateContent({
+      model,
+      contents: prompt,
+      config: { systemInstruction: systemInstruction, responseMimeType: "application/json" },
+    });
+  } catch (e) {
+    handleApiError(e);
+  }
 
   try {
     return JSON.parse(stripMarkdown(response.text || "[]"));

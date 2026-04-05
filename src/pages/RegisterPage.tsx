@@ -2,18 +2,20 @@ import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuthStore } from '../lib/api';
 import { motion } from 'motion/react';
-import { BookOpen, ShieldCheck } from 'lucide-react';
-export const LoginPage = () => {
+import { BookOpen, ShieldCheck, UserPlus } from 'lucide-react';
+
+export const RegisterPage = () => {
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [role, setRole] = useState<'ADMIN' | 'STUDENT'>('STUDENT');
   const { setAuth } = useAuthStore();
   const navigate = useNavigate();
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleRegister = (e: React.FormEvent) => {
     e.preventDefault();
     // Simulate API call
-    setAuth('fake-jwt-token', { email, role, name: email.split('@')[0] });
+    setAuth('fake-jwt-token', { email, role, name });
     navigate(role === 'ADMIN' ? '/admin/dashboard' : '/student/dashboard');
   };
 
@@ -30,10 +32,10 @@ export const LoginPage = () => {
       >
         <div className="text-center mb-8">
           <div className="w-16 h-16 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-xl shadow-indigo-500/20">
-            <BookOpen className="text-white" size={32} />
+            <UserPlus className="text-white" size={32} />
           </div>
-          <h1 className="text-3xl font-bold tracking-tight mb-2">Welcome Back</h1>
-          <p className="text-white/60">Sign in to your learning portal</p>
+          <h1 className="text-3xl font-bold tracking-tight mb-2">Create Account</h1>
+          <p className="text-white/60">Join the learning portal</p>
         </div>
 
         <div className="flex gap-4 mb-8">
@@ -57,7 +59,18 @@ export const LoginPage = () => {
           </button>
         </div>
 
-        <form onSubmit={handleLogin} className="space-y-4">
+        <form onSubmit={handleRegister} className="space-y-4">
+          <div>
+            <label className="block text-sm font-medium text-white/60 mb-1.5 ml-1">Full Name</label>
+            <input
+              type="text"
+              required
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none transition-all"
+              placeholder="John Doe"
+            />
+          </div>
           <div>
             <label className="block text-sm font-medium text-white/60 mb-1.5 ml-1">Email Address</label>
             <input
@@ -84,12 +97,12 @@ export const LoginPage = () => {
             type="submit"
             className="w-full py-4 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-semibold rounded-xl shadow-lg shadow-indigo-500/20 transition-all active:scale-[0.98] mt-4"
           >
-            Sign In
+            Sign Up
           </button>
         </form>
 
         <p className="text-center mt-6 text-white/40 text-sm">
-          Don't have an account? <Link to="/register" className="text-indigo-400 hover:underline">Register</Link>
+          Already have an account? <Link to="/login" className="text-indigo-400 hover:underline">Sign In</Link>
         </p>
       </motion.div>
     </div>

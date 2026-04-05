@@ -35,15 +35,15 @@ export const StudentDashboard = () => {
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-[10px] font-bold uppercase tracking-wider">
             <TrendingUp size={12} /> Student Dashboard
           </div>
-          <h1 className="text-5xl font-extrabold tracking-tight">
-            Welcome back, <br className="sm:hidden" />
-            <span className="relative inline-block">
+          <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight leading-tight">
+            Welcome back, <br className="lg:hidden" />
+            <span className="relative inline-block z-10">
               {user?.name}
               <motion.div 
                 initial={{ width: 0 }}
                 animate={{ width: '100%' }}
                 transition={{ delay: 0.5, duration: 0.8 }}
-                className="absolute bottom-1 left-0 h-1.5 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full opacity-50"
+                className="absolute bottom-1 left-0 h-3 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full opacity-40 -z-10"
               />
             </span>
             !

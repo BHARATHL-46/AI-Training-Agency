@@ -74,7 +74,7 @@ export const AnalyticsPage = () => {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} className="bg-white/5 border border-white/10 rounded-3xl p-8">
           <h3 className="text-xl font-bold mb-8">{isAdmin ? 'Student Activity Growth' : 'Performance Trends'}</h3>
-          <div className="h-[300px] w-full relative min-h-[300px] min-w-0 overflow-hidden">
+          <div className="h-[300px] w-full relative min-h-[300px] min-w-0 overflow-hidden" style={{ minWidth: 0, minHeight: 0 }}>
             <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0} debounce={50}>
               {isAdmin ? (
                 <BarChart data={adminGlobalData}>
@@ -101,7 +101,7 @@ export const AnalyticsPage = () => {
 
         <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} className="bg-white/5 border border-white/10 rounded-3xl p-8">
           <h3 className="text-xl font-bold mb-8">{isAdmin ? 'Module Popularity' : 'Topic Mastery'}</h3>
-          <div className="h-[300px] w-full relative min-h-[300px] min-w-0 overflow-hidden">
+          <div className="h-[300px] w-full relative min-h-[300px] min-w-0 overflow-hidden" style={{ minWidth: 0, minHeight: 0 }}>
             <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0} debounce={50}>
               <BarChart data={isAdmin ? [
                 { name: 'Intro AI', value: 980 },

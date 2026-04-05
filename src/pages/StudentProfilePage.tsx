@@ -140,15 +140,7 @@ export const StudentProfilePage = () => {
               >
                 Edit Profile
               </motion.button>
-              <motion.button 
-                whileHover={{ scale: 1.05, y: -2 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => alert('Public profile feature coming soon!')}
-                className="px-10 py-4 bg-white/5 border border-white/10 rounded-[1.5rem] font-black text-sm hover:bg-white/10 transition-all flex items-center gap-2"
-              >
-                View Public Profile
-                <ExternalLink size={14} />
-              </motion.button>
+
             </div>
           </div>
 

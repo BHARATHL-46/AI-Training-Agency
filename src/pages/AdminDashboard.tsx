@@ -70,7 +70,7 @@ export const AdminDashboard = () => {
         {/* Enrollment Chart */}
         <div className="lg:col-span-2 bg-white/5 border border-white/10 rounded-3xl p-8">
           <h3 className="text-xl font-bold mb-8">Student Enrollment Growth</h3>
-          <div className="h-[300px] w-full relative min-h-[300px] min-w-0 overflow-hidden">
+          <div className="h-[300px] w-full relative min-h-[300px] min-w-0 overflow-hidden" style={{ minWidth: 0, minHeight: 0 }}>
             <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0} debounce={50}>
               <AreaChart data={enrollmentData}>
                 <defs>
@@ -121,7 +121,7 @@ export const AdminDashboard = () => {
       {/* Module Performance */}
       <div className="bg-white/5 border border-white/10 rounded-3xl p-8">
         <h3 className="text-xl font-bold mb-8">Module Completion Rates</h3>
-        <div className="h-[250px] w-full relative min-h-[250px] min-w-0 overflow-hidden">
+        <div className="h-[250px] w-full relative min-h-[250px] min-w-0 overflow-hidden" style={{ minWidth: 0, minHeight: 0 }}>
           <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0} debounce={50}>
             <BarChart data={modulePerformance}>
               <CartesianGrid strokeDasharray="3 3" stroke="#ffffff10" vertical={false} />

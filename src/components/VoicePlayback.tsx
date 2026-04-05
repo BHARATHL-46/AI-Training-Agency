@@ -162,10 +162,10 @@ export const VoicePlayback: React.FC<VoicePlaybackProps> = ({ text, language = '
           onChange={(e) => setSpeed(parseFloat(e.target.value))}
           className="bg-transparent text-xs border-none focus:ring-0 cursor-pointer"
         >
-          <option value="0.5">0.5x</option>
-          <option value="1">1.0x</option>
-          <option value="1.5">1.5x</option>
-          <option value="2">2.0x</option>
+          <option value="0.5" className="bg-[#1a1a1a] text-white">0.5x</option>
+          <option value="1" className="bg-[#1a1a1a] text-white">1.0x</option>
+          <option value="1.5" className="bg-[#1a1a1a] text-white">1.5x</option>
+          <option value="2" className="bg-[#1a1a1a] text-white">2.0x</option>
         </select>
       </div>
     </div>

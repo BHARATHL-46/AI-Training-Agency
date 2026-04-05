@@ -8,11 +8,7 @@ import { GoogleGenAI } from "@google/genai";
 import Database from "better-sqlite3";
 import dotenv from "dotenv";
 import { createServer as createViteServer } from "vite";
-import { createRequire } from "module";
-
-const require = createRequire(import.meta.url);
-const pdfImport = require("pdf-parse");
-const pdf = typeof pdfImport === "function" ? pdfImport : pdfImport.default;
+import { PDFParse } from "pdf-parse";
 
 dotenv.config();
 
@@ -124,8 +120,10 @@ async function startServer() {
 
       if (ext === ".pdf") {
         const dataBuffer = fs.readFileSync(file.path);
-        const data = await pdf(dataBuffer);
-        text = data.text;
+        const parser = new PDFParse({ data: dataBuffer });
+        const result = await parser.getText();
+        text = result.text;
+        await parser.destroy();
       } else if (ext === ".docx") {
         const dataBuffer = fs.readFileSync(file.path);
         const data = await mammoth.extractRawText({ buffer: dataBuffer });
